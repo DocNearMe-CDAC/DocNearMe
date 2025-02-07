@@ -15,10 +15,12 @@ public class Patient {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int patientId;
+    @Column(name = "patientid")
+    private int patientid;
 
-    @Column(name = "name", nullable = false)
-    private String Name;
+
+    @Column(name = "full_name", nullable = false)
+    private String fullName;
 
     @Column(name = "phone_number", nullable = false, unique = true)
     private String phoneNumber;
@@ -35,24 +37,22 @@ public class Patient {
     @Column(name = "medical_history", nullable = true, columnDefinition = "TEXT")
     private String medicalHistory;
 
-    @Enumerated(EnumType.STRING) 
+    @Enumerated(EnumType.STRING)
     @Column(name = "gender", nullable = false)
     private Gender gender;
 
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "confirm_password", nullable = false)
     private String confirmPassword;
 
-   
     public Patient() {
-    	
+ 
     }
 
-    public Patient(String Name, String phoneNumber, String email, Integer age, String address, 
-                   String medicalHistory, Gender gender, String password, String confirmPassword) {
-        this.Name = Name;
+
+    public Patient(String fullName, String phoneNumber, String email, Integer age, String address, String medicalHistory, Gender gender, String password, String confirmPassword) {
+        this.fullName = fullName;
         this.phoneNumber = phoneNumber;
         this.email = email;
         this.age = age;
@@ -63,21 +63,20 @@ public class Patient {
         this.confirmPassword = confirmPassword;
     }
 
-   
-    public int getId() {
-        return patientId;
+    public int getPatientId() {
+        return patientid;
     }
 
-    public void setId(int patientId) {
-        this.patientId = patientId;
+    public void setPatientId(int patientId) {
+        this.patientid = patientId;
     }
 
-    public String getName() {
-        return Name;
+    public String getFullName() {
+        return fullName;
     }
 
-    public void setFirstName(String Name) {
-        this.Name = Name;
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
     }
 
     public String getPhoneNumber() {

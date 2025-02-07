@@ -15,7 +15,7 @@ public class User {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int userId;
+	private int userid;
 
 	@Column(name = "email", nullable = false, unique = true)
 	private String email;
@@ -38,11 +38,11 @@ public class User {
 	}
 
 	public int getUserId() {
-		return userId;
+		return userid;
 	}
 
 	public void setUserId(int userId) {
-		this.userId = userId;
+		this.userid = userId;
 	}
 
 	public String getEmail() {

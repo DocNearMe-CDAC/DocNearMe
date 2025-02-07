@@ -1,70 +1,107 @@
 package cdac.DocNearMe.Entity;
 
+import java.time.LocalTime;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
+import jakarta.persistence.UniqueConstraint;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
-@Table(name = "doctors")
+@Table(name = "doctors", uniqueConstraints = {
+    @UniqueConstraint(columnNames = "email")
+})
 public class Doctor {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int doctorId;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int doctorId;
 
-	@Column(name = "doctor_name", nullable = false)
-	private String doctorName;
+    @NotBlank(message = "Doctor name is required")
+    @Column(name = "doctor_name", nullable = false)
+    private String doctorName;
 
-	@Column(name = "specialization", nullable = false)
-	private String doctorSpecialization;
+    @NotBlank(message = "Specialization is required")
+    @Column(name = "specialization", nullable = false)
+    private String specialization;
 
-	@Column(name = "email", nullable = false, unique = true)
-	private String email;
+    @Email(message = "Invalid email format")
+    @NotBlank(message = "Email is required")
+    @Column(nullable = false)
+    private String email;
 
-	@Column(name = "address", nullable = false)
-	private String address;
+    @NotBlank(message = "Address is required")
+    @Column(nullable = false)
+    private String address;
 
-	@Column(name = "opening_time", nullable = false)
-	private String openingTime;
+    @Column(name = "opening_time", nullable = false)
+    @JsonFormat(pattern = "HH:mm")
+    private LocalTime openingTime;
 
-	@Column(name = "closing_time", nullable = false)
-	private String closingTime;
+    @Column(name = "closing_time", nullable = false)
+    @JsonFormat(pattern = "HH:mm")
+    private LocalTime closingTime;
 
-	@Column(name = "license", nullable = true)
-    private String licensePath;
+    @Lob
+    @Column(name = "license", columnDefinition = "LONGBLOB")
+    private String license;
 
-	@Column(name = "password", nullable = false)
-	private String password;
+    @NotBlank(message = "Password is required")
+    @Column(nullable = false)
+    @JsonIgnore
+    private String password;
+    
+    private String confirmPassword;
+    
+    
+    public Doctor() {
+    	
+    }
 
-	@Column(name = "confirm_password", nullable = false)
-	private String confirmPassword;
+    
+    public void setOpeningTime(String time) {
+        this.openingTime = LocalTime.parse(time);
+    }
 
-	public Doctor() {
-		
-	}
+    public void setClosingTime(String time) {
+        this.closingTime = LocalTime.parse(time);
+    }
 
-	public Doctor(String doctorName, String doctorSpecialization, String email, String address, String openingTime,
-			String closingTime, String licensePath, String password, String confirmPassword) {
+    public String getOpeningTimeString() {
+        return openingTime != null ? openingTime.toString() : null;
+    }
+
+    public String getClosingTimeString() {
+        return closingTime != null ? closingTime.toString() : null;
+    }
+
+	public Doctor(String doctorName,String specialization,String email,String address, LocalTime openingTime, LocalTime closingTime,
+			String license, String password) {
+		super();
 		this.doctorName = doctorName;
-		this.doctorSpecialization = doctorSpecialization;
+		this.specialization = specialization;
 		this.email = email;
 		this.address = address;
 		this.openingTime = openingTime;
 		this.closingTime = closingTime;
-		this.licensePath = licensePath;
+		this.license = license;
 		this.password = password;
-		this.confirmPassword = confirmPassword;
 	}
 
-	
-	public int getId() {
+	public int getDoctorId() {
 		return doctorId;
 	}
 
-	public void setId(int doctorId) {
+	public void setDoctorId(int doctorId) {
 		this.doctorId = doctorId;
 	}
 
@@ -76,12 +113,12 @@ public class Doctor {
 		this.doctorName = doctorName;
 	}
 
-	public String getDoctorSpecialization() {
-		return doctorSpecialization;
+	public String getSpecialization() {
+		return specialization;
 	}
 
-	public void setDoctorSpecialization(String doctorSpecialization) {
-		this.doctorSpecialization = doctorSpecialization;
+	public void setSpecialization(String specialization) {
+		this.specialization = specialization;
 	}
 
 	public String getEmail() {
@@ -100,29 +137,13 @@ public class Doctor {
 		this.address = address;
 	}
 
-	public String getOpeningTime() {
-		return openingTime;
+	public String getLicense() {
+		return license;
 	}
 
-	public void setOpeningTime(String openingTime) {
-		this.openingTime = openingTime;
+	public void setLicense(String license) {
+		this.license = license;
 	}
-
-	public String getClosingTime() {
-		return closingTime;
-	}
-
-	public void setClosingTime(String closingTime) {
-		this.closingTime = closingTime;
-	}
-
-	public String getLicensePath() {
-        return licensePath;
-    }
-
-    public void setLicensePath(String licensePath) {
-        this.licensePath = licensePath;
-    }
 
 	public String getPassword() {
 		return password;
@@ -131,12 +152,21 @@ public class Doctor {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+ 
+	
 
 	public String getConfirmPassword() {
 		return confirmPassword;
 	}
 
+
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
+	}
+
+
+	public Object getLicenseFileName() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
