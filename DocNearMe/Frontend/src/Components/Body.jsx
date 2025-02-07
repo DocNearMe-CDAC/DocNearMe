@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Login from "./Login";
 import Register from "./Register";
+import AppointmentBooking from "./AppointmentBooking";
 
 const Body = () => {
   const appRouter = createBrowserRouter([
@@ -11,6 +12,10 @@ const Body = () => {
     {
       path: "/register",
       element: <Register />,
+    },
+    {
+      path: "/appointmentbooking",
+      element: <AppointmentBooking />,
     },
   ]);
 
