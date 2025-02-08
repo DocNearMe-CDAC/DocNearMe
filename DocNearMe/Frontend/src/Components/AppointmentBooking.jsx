@@ -14,7 +14,7 @@ const AppointmentBooking = () => {
   useEffect(() => {
     const fetchDoctors = async () => {
       try {
-        const response = await axios.get("http://localhost:8080/api/doctors"); //yha pe apne api ka link 
+        const response = await axios.get("http://localhost:8085/api/doctors"); //yha pe apne api ka link 
         setDoctors(response.data);
       } catch (error) {
         console.error("Error fetching doctors:", error);

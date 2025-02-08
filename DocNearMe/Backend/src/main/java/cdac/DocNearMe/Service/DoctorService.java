@@ -1,6 +1,8 @@
 package cdac.DocNearMe.Service;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,6 +36,12 @@ public class DoctorService {
             doctor.setLicense(file.getOriginalFilename());
         }
         return doctorRepository.save(doctor);
+    }
+    public Optional<List<Doctor>> getAllDoctor()
+    {
+    	List<Doctor> dt = doctorRepository.findAll();
+    	Optional<List<Doctor>> optionalList = Optional.ofNullable(dt);
+    	return optionalList;
     }
 
    
