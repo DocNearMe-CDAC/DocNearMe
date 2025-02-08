@@ -28,7 +28,7 @@ const Patient = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8085/api/patient/register",
+        "http://localhost:8080/api/patient/register",
         JSON.stringify(formData),
         {
           headers: {

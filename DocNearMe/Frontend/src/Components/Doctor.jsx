@@ -37,7 +37,7 @@ const Doctor = () => {
 
     try {
       const response = await fetch(
-        "http://localhost:8085/api/doctor/register",
+        "http://localhost:8080/api/doctor/register",
         {
           method: "POST",
           body: formDataToSend,
