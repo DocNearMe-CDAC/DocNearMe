@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Doctor = () => {
   const [file, setFile] = useState(null);
   const [filePreview, setFilePreview] = useState(null);
+  const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
     doctorName: "",
@@ -13,6 +15,7 @@ const Doctor = () => {
     closingTime: "17:00",
     password: "",
     confirmPassword: "",
+    role:"DOCTOR"
   });
 
   const handleInputChange = (e) => {
@@ -48,6 +51,7 @@ const Doctor = () => {
 
       const data = await response.json();
       console.log("Registration successful:", data);
+      navigate("/");
     } catch (error) {
       console.error("Registration error:", error);
     }

@@ -14,6 +14,7 @@ const Patient = () => {
     gender: "",
     password: "",
     confirmPassword: "",
+    role: "PATIENT",
   });
 
   const handleChange = (e) => {
