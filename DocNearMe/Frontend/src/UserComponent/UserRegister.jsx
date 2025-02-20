@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const UserRegister = () => {
   const navigate = useNavigate();
@@ -29,8 +29,6 @@ const UserRegister = () => {
   } else if (document.URL.indexOf("doctor") !== -1) {
     user.role = "doctor";
   }
-
-  console.log("ROLE FECTHED : " + user.role);
 
   const handleUserInput = (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
@@ -106,7 +104,10 @@ const UserRegister = () => {
         progress: undefined,
       });
 
-      
+      // Redirect to login page after 2 seconds
+      setTimeout(() => {
+        navigate("/user/login");
+      }, 2000);
 
       result
         .json()
@@ -116,8 +117,18 @@ const UserRegister = () => {
         .catch((error) => {
           console.log(error);
         });
+    }).catch((error) => {
+      console.error('Error during registration:', error);
+      toast.error("Registration failed. Please try again.", {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
     });
-    setTimeout(() => navigate("/login"), 2000);
   };
 
   return (
@@ -132,6 +143,7 @@ const UserRegister = () => {
           </div>
           <div className="card-body">
             <form className="row g-3" onSubmit={saveUser}>
+              {/* Registration form fields */}
               <div className="col-md-6 mb-3 text-color">
                 <label htmlFor="title" className="form-label">
                   <b> First Name</b>
@@ -289,7 +301,7 @@ const UserRegister = () => {
                   value="Register User"
                 />
               </div>
-              <ToastContainer />
+             <ToastContainer />
             </form>
           </div>
         </div>

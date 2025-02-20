@@ -1,134 +1,64 @@
 import { Link } from "react-router-dom";
+import logo from "../images/h_logo.png";
 import RoleNav from "./RoleNav";
-import "../styles/header.css";
 
 const Header = () => {
   return (
-    <nav className="navbar navbar-expand-lg navbar-dark py-2">
-      <div className="container">
-        {/* Branding Section */}
-        <Link
-          to="/"
-          className="navbar-brand d-flex align-items-center hover-scale"
-          style={{ transition: "transform 0.3s ease" }}
-        >
+    <div>
+      <nav className="navbar  navbar-expand-lg custom-bg text-color">
+        <div className="container-fluid text-color">
           <img
-            src="/images/h_logo.png"
-            width="50"
-            height="50"
-            className="d-inline-block me-2 pulse"
-            alt="DocNearMe Logo"
+            src={logo}
+            width="40"
+            height="40"
+            className="d-inline-block align-top"
+            alt=""
           />
-          <span className="fw-bold fs-4 gradient-text">DocNearMe</span>
-        </Link>
+          <Link to="/" className="navbar-brand">
+            <i>
+              <b className="text-color">DocNearMe</b>
+            </i>
+          </Link>
 
-        {/* Mobile Toggle */}
-        <button
-          className="navbar-toggler border-0"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              <li className="nav-item">
+                <Link
+                  to="/about"
+                  className="nav-link active"
+                  aria-current="page"
+                >
+                  <b className="text-color">About Us</b>
+                </Link>
+              </li>
 
-        {/* Navigation Items */}
-        <div
-          className="collapse navbar-collapse justify-content-end"
-          id="navbarNav"
-        >
-          <ul className="navbar-nav align-items-center me-lg-4">
-            <li className="nav-item mx-2">
-              <Link
-                to="/about"
-                className="nav-link position-relative hover-underline"
-                activeclassname="active"
-              >
-                About Us
-              </Link>
-            </li>
-            <li className="nav-item mx-2">
-              <Link
-                to="/contact"
-                className="nav-link position-relative hover-underline"
-                activeclassname="active"
-              >
-                Contact Us
-              </Link>
-            </li>
-          </ul>
+              <li className="nav-item">
+                <Link
+                  to="/contact"
+                  className="nav-link active"
+                  aria-current="page"
+                >
+                  <b className="text-color">Contact Us</b>
+                </Link>
+              </li>
+            </ul>
 
-          {/* Role-Based Navigation */}
-          <RoleNav />
+            <RoleNav />
+          </div>
         </div>
-      </div>
-
-      <style jsx>{`
-        nav {
-          background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-          box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-        }
-
-        .hover-underline::after {
-          content: "";
-          position: absolute;
-          width: 0;
-          height: 2px;
-          bottom: 0;
-          left: 0;
-          background-color: #fff;
-          transition: width 0.3s ease;
-        }
-
-        .hover-underline:hover::after,
-        .active::after {
-          width: 100%;
-        }
-
-        .gradient-text {
-          background: linear-gradient(45deg, #fff, #a8d0ff);
-          -webkit-background-clip: text;
-          background-clip: text;
-          color: transparent;
-        }
-
-        .hover-scale:hover {
-          transform: scale(1.05);
-        }
-
-        .pulse {
-          animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-          0% {
-            transform: scale(1);
-          }
-          50% {
-            transform: scale(1.05);
-          }
-          100% {
-            transform: scale(1);
-          }
-        }
-
-        @media (max-width: 992px) {
-          .navbar-collapse {
-            background: rgba(0, 0, 0, 0.9);
-            padding: 1rem;
-            border-radius: 10px;
-            margin-top: 1rem;
-          }
-
-          .nav-item {
-            margin: 0.5rem 0;
-          }
-        }
-      `}</style>
-    </nav>
+      </nav>
+    </div>
   );
 };
 

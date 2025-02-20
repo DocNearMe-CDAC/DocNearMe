@@ -8,6 +8,11 @@ const NormalHeader = () => {
           <b className="text-color">Register Patient</b>
         </Link>
       </li>
+      <li className="nav-item">
+        <Link to="/user/doctor/register" className="nav-link active" aria-current="page">
+          <b className="text-color">Register Doctor</b>
+        </Link>
+      </li>
 
       <li className="nav-item">
         <Link to="/user/login" className="nav-link active" aria-current="page">
